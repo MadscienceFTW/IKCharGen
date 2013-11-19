@@ -23,7 +23,7 @@ for x in baseRaces:
 	print(str(count) + str(baseRaces[count]))
 	count+=1
 entry = input("Enter a number of the race you would like:")
-y = baseRaces[entry]
+y = baseRaces[int(entry)]
 with con:
 
 	con.row_factory = lite.Row
