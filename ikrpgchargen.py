@@ -75,15 +75,6 @@ if len(charName) < 1:
 	charName = input("What is your characters name?")
 else:
 	print("Thank you")
-con = lite.connect('firsttest.db')
-with con:
-	cur = con.cursor() 
-
-	cur.execute("DROP TABLE IF EXISTS " + charName)
-	cur.execute("""CREATE TABLE """ + charName + """
-					(name,race,archtype,phy,spd,str,agl,prw,poi,int,arc,per,willpower,skills,equipment,mat,matpow,rat,ratrange,ratpow,def,arm,lifespiral,featpoints,career1,career2,sex,faith,height,weight,xp,init,commandrange,abilities,spells)
-				""")
-	cur.execute("INSERT INTO " + charName +"(name) VALUES ('"+ str(charName)+"')")
 raceCount = 1
 while raceCount > 0:
 	raceEntry = input("What race would you like to play?")
@@ -153,8 +144,23 @@ while careerCount > 0:
 			careerCount-=1
 	else:
 		print("That is not a selectable career.")
+willpower = charStats[0] + charStats[6]
+initiative = charStats[1] + charStats[4] + charStats[8]
+defense = charStats[1] + charStats[3] + charStats[8]
+armor = charStats[0]
+cmdrange = charStats[6]
+if raceEntry == "gobber":
+	defense += 1
+elif raceEntry == "nyss":
+	initiative += 1
+con = lite.connect('firsttest.db')
 with con:
 	cur = con.cursor()
+	cur.execute("DROP TABLE IF EXISTS " + charName)
+	cur.execute("""CREATE TABLE """ + charName + """
+					(name,race,archtype,phy,spd,str,agl,prw,poi,int,arc,per,willpower,skills,equipment,mat,matpow,rat,ratrange,ratpow,def,arm,lifespiral,featpoints,career1,career2,sex,faith,height,weight,xp,init,commandrange,abilities,spells)
+				""")
+	cur.execute("INSERT INTO " + charName +"(name) VALUES ('"+ str(charName)+"')")
 	cur.execute('UPDATE ' + charName + ' SET race= "'+ str(raceEntry)+'"')
 	cur.execute('UPDATE ' + charName + ' SET archtype= "'+ str(archEntry)+'"')
 	cur.execute('UPDATE ' + charName + ' SET phy= "'+ str(charStats[0])+'"')
@@ -166,6 +172,11 @@ with con:
 	cur.execute('UPDATE ' + charName + ' SET int= "'+ str(charStats[6])+'"')
 	cur.execute('UPDATE ' + charName + ' SET arc= "'+ str(charStats[7])+'"')
 	cur.execute('UPDATE ' + charName + ' SET per= "'+ str(charStats[8])+'"')
+	cur.execute('UPDATE ' + charName + ' SET willpower= "'+ str(willpower)+'"')
+	cur.execute('UPDATE ' + charName + ' SET init= "'+ str(initiative)+'"')
+	cur.execute('UPDATE ' + charName + ' SET def= "'+ str(defense)+'"')
+	cur.execute('UPDATE ' + charName + ' SET arm= "'+ str(armor)+'"')
+	cur.execute('UPDATE ' + charName + ' SET commandrange= "'+ str(cmdrange)+'"')
 	cur.execute('UPDATE ' + charName + ' SET career1= "'+ str(charCareers[0])+'"')
 	cur.execute('UPDATE ' + charName + ' SET career2= "'+ str(charCareers[1])+'"')
 displayStats(charStats)
