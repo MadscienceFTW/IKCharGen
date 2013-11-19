@@ -3,6 +3,7 @@ Arcane Mechanik
 Arcanist
 Aristocrat
 Bounty Hunter
+
 Cutthroat
 Duelist
 Explorer
@@ -10,7 +11,9 @@ Fell Caller
 Field Mechanik
 Gun Mage
 Highwayman
+
 Investigator
+
 Iron Fang
 Knight
 Mage Hunter
@@ -21,8 +24,11 @@ Priest of Morrow
 Priest of Menoth
 Rifleman
 Soldier
+
 Sorcerer
+
 Spy
+
 Stormblade
 Thief
 Trencher
@@ -30,13 +36,16 @@ Warcaster
 Pistoleer
 Ranger
 Guttersnipe
+
 Labor Korune
 Pugilist
+
 Searforge Trader
 Seeker
 Urban Nomad
 Stormsmith
 Assault Kommando
+
 Doom Reaver
 Horseman
 Man-O-War
@@ -45,9 +54,11 @@ Allegiant of the Order of the Fist
 Exemplar
 Paladin of the Order of the Wall
 Reclaimer
+
 Scrutator
 Thamarite Advocate
 Raider
+
 Long Rider
 Priest of Cyriss
-Warcaster, Cyriss
+Cyriss Warcaster
