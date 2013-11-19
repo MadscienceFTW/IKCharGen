@@ -1,0 +1,1 @@
+name,race,archtype,phy,spd,str,agl,prw,poi,int,arc,per,willpower,skills,equipment,mat,matpow,rat,ratrange,ratpow,def,arm,lifespiral,featpoints,careers,sex,faith,height,weight,xp,init,commandrange,abilities,spells,

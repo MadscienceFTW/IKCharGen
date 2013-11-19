@@ -1,0 +1,147 @@
+'Jack Marshal
+Ace Commander
+Acrobatics
+Advisor
+Ambush
+Anatomical Precision
+Appraise
+Arcane Assassin
+Arcane Defenses
+Arcane Engineer
+Arcane Precision
+Arcane Scholar
+Astute
+Backstab
+Battle Commander
+Battle Plan:Call to Action
+Battle Plan:Coordinated Strike
+Battle Plan:Desperate Pace
+Battle Plan:Go to Ground
+Battle Plan:Reconnaissance
+Battle Plan:Shadow
+Bayonet Charge
+Big Game Hunter
+Binding
+Blaster
+Blood Spiller
+Bodge
+Bodyguard
+Bomber
+Bond
+Brew Master
+Camouflage
+Card Sharp
+Cautious Advance
+Cavalry Charge
+Chain Attack:Bleed Out
+Chain Attack:Pin Down
+Choir
+Cleave
+Combat Rider
+Conniver
+Cover Identity
+Crackshot
+Craft Rune Shot
+Crossbowman
+Defender
+Defensive Line
+Dig In
+Disease Resistance
+Dispel
+Dodger
+Drive:Ancillary Attack
+Drive:Assault
+Drive:Off Road
+Drive:Pronto
+Dual Shot
+Elemental Mastery
+Empower
+Expert Rider
+Fast Cook
+Fast Draw
+Fast Rearm
+Fast Reload
+Fell Call:Cacophony
+Fell Call:Call of Defiance
+Fell Call:Ground Shaker
+Fell Call:Heroic Ballad
+Fell Call:Reverberation
+Fell Call:Signal Call
+Fell Call:Sonic Blast
+Field Alchemist
+Field Marshal:Magical Attack
+Field Marshal:Relentless Charge
+Field Marshal:Shield Guard
+Find Cover
+Fire in the Hole!
+Fleet Foot
+Free Style
+Gang
+Get Away
+Girded
+Good Breeding
+Great Power
+Grenadier
+Gunfighter
+Head-Butt
+Hit the Deck!
+Hyper Awareness
+Immunity:Cold
+Immunity:Corrosion
+Immunity:Electricity
+Immunity:Fire
+Inscribe Formulae
+Iron Sentinel
+Iron Will
+Keen Eyed
+Language
+Legacy of Bragg
+Light Cavalry
+Load Bearing
+Mage Killer
+Marksman
+Natural Leader
+Night Fighter
+Parry
+Pathfinder
+Poison Resistance
+Port of Call
+Precision Strike
+Press the Attack
+Privilege
+Prowl
+Pursuit
+Quick Work
+Rallying Cry
+Relentless Charge
+Resourceful
+Retaliatory Strike
+Return Fire
+Ride-By Attack
+Riposte
+Rock Solid
+Roll With It
+Saddle Shot
+Scrounge
+Sentry
+Set Defense
+Shadow Magic
+Shield Guard
+Shield Slam
+Signal Language
+Sniper
+Specialization
+Steady
+Steamo
+Sucker!
+Swift Hunter
+Swift Rider
+Take Down
+Targeteer
+Team Leader
+Traceless Path
+Truth Reader
+Tune Up
+Two-Weapon Fighting
+University Education
+Waylay

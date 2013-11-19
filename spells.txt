@@ -1,0 +1,156 @@
+Arcane Bolt,Arcane Strike,Arcantrik Bolt,Ashen Cloud,Ashes to Ashes
+Aura of Protection
+Awareness
+Banishing Ward
+Barrier of Flames
+Battering Ram
+Batten Down the Hatches
+Black Out
+Blade of Radiance
+Blazing Effigy
+Blessing of Health
+Blessing of Morrow
+Blessings of War
+Blizzard
+Brittle Frost
+Boundless Charge
+Broadside
+Celerity
+Chain Lightning
+Chiller
+Cleansing Fire
+Convection
+Crevasse
+Crusader's Call
+Daylight
+Deceleration
+Deep Freeze
+Earthquake
+Earth's Cradle
+Earthsplitter
+Electrical Blast
+Electrify
+Eliminator
+Entangle
+Eyes of Truth
+Extinguisher
+Fail Safe
+Fair Winds
+Fire Group
+Fire Starter
+Flames of Wrath
+Flare
+Fog of War
+Force Field
+Force Hammer
+Force of Faith
+Fortify
+Foxhole
+Freezing Grip
+Freezing Mist
+Frozen Ground
+Frostbite
+Fuel the Flames
+Full Throttle
+Grind
+Guided Blade
+Guided Fire
+Hand of Fate
+Heal
+Heightened Reflexes
+Hex Blast
+Hoarfrost
+Howling Flames
+Hymn of Battle
+Hymn of Passage
+Hymn of Shielding
+Ice Bolt
+Ice Shield
+Icy Grip
+Ignite
+Immolation
+Inferno
+Influence
+Inhospitable Ground
+Iron Aggression
+Jackhammer
+Jump Start
+Lamentation
+Light in the Darkness
+Lightning Tendrils
+Locomotion
+Mirage
+Obliteration
+Occultation
+Overmind
+Polarity Shield
+Positive Charge
+Power Booster
+Prayer for Guidance
+Protection from Cold
+Protection from Corrosion
+Protection from Electricity
+Protection from Fire
+Purification
+Raging Winds
+Razor Wind
+Redline
+Refuge
+Return Fire
+Rift
+Righteous Flames
+Rime
+Rock Hammer
+Rock Wall
+Rune Shot:Accuracy
+Rune Shot:Black Penny
+Rune Shot:Brutal
+Rune Shot:Detonator
+Rune Shot:Earth Shaker
+Rune Shot:Fire Beacon
+Rune Shot:Freeze Fire
+Rune Shot:Heart Stopper
+Rune Shot:Iron Rot
+Rune Shot:Molten Shot
+Rune Shot:Momentum
+Rune Shot:Phantom Seeker
+Rune Shot:Shadow Fire
+Rune Shot:Silencer
+Rune Shot:Spell Cracker
+Rune Shot:Spontaneous Combustion
+Rune Shot:Thunderbolt
+Rune Shot:Trick Shot
+Sanguine Blessing
+Sea of Fire
+Shatter Storm
+Shield of Faith
+Shock Wave
+Short Out
+Snipe
+Solid Ground
+Solovin's Boon
+Star Fire
+Staying Winter's Hand
+Stone Stance
+Stone Strength
+Storm Tossed
+Sunburst
+Superiority
+Telekinesis
+Temper Metal
+Tempest
+Tide of Steel
+Tornado
+Transference
+Triage
+True Path
+True Sight
+Vision
+Voltaic Lock
+Wall of Fire
+White Out
+Wind Blast
+Wind Strike
+Wings of Air
+Winter Storm
+Zephyr
