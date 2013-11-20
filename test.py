@@ -2,19 +2,22 @@ import sqlite3 as lite
 import sys
 import os
 import csv
-
+variables = []
+testbed = []
 con = lite.connect('firsttest.db')
-
-careers = []
-if os.name == 'nt':
-	data = open("f:\\Dev\\IKCharGen\\newcareers.txt")
-elif os.name == 'posix':
-	data = open('~/Dropbox/Dev/IK/careers.txt')
-for each_line in data:
-	careers.append(each_line)
-data.close()
-with open('newcareers.txt','r') as fin:
-	dr = csv.reader(fin)
-	for x in dr:
-		for y in x:
-			print((y,))
+csvWriter = csv.writer(open("output.txt", "w"))
+with con:
+	cur = con.cursor()
+	cur.execute('Select * from Tony')
+	rows = cur.fetchall()
+	csvWriter.writerows(rows)
+#data2 = open('f:\\Dev\\IKChargen\\variables.txt')
+#for each_line in data2:
+#	variables.append(each_line.split(','))
+#data2.close()
+spamReader = csv.reader(open('variables.txt',newline=''))
+for row in spamReader:
+	variables.append(row)
+for x in variables[0]:
+	testbed.append(x)
+print(testbed)

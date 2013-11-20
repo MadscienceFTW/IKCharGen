@@ -1,12 +1,15 @@
 import os
 import sqlite3 as lite
 import sys
+import csv
 baseStats = ["PHY","SPD","STR","AGL","PRW","POI","INT","ARC","PER"]
 charStats = []
 charArch = []
 archEntry = []
 charCareers = []
 careers = []
+variables = []
+tempbed = []
 humanStats = [5,6,4,3,4,4,3,"-",3,["gifted","intellectual","mighty","skilled"]]
 humanMax = [7,7,6,5,5,5,5,4,5]
 dwarfStats = [6,4,5,3,4,3,4,"-",3,["gifted","intellectual","mighty","skilled"]]
@@ -25,12 +28,17 @@ satyxisStats = [5,6,5,3,4,3,3,"-",3,["gifted","mighty","skilled"]]
 satyxisMax = [7,7,7,7,7,7,7,7,7]
 baseRaces = {"human":humanStats,"dwarf":dwarfStats,"gobber":gobberStats,"iosan":iosanStats,"nyss":nyssStats,"ogrun":ogrunStats,"trollkin":trollkinStats,"satyxis":satyxisStats}
 if os.name == 'nt':
-	data = open('f:\Dropbox\Dev\IK\careers.txt')
+	data = open('f:\\Dev\\IKChargen\\careers.txt')
 elif os.name == 'posix':
 	data = open('/home/ap/Dropbox/Dev/IK/careers.txt')
 for each_line in data:
 	careers.append(each_line.rstrip('\n'))
 data.close()
+spamReader = csv.reader(open('variables.txt',newline=''))
+for row in spamReader:
+	tempbed.append(row)
+for x in tempbed[0]:
+	variables.append(x)
 def displayStats(race):
 	os.system(clearingScreen())
 	print(raceEntry.title())
@@ -133,6 +141,7 @@ while careerCount > 0:
 	os.system(clearingScreen())
 	displayStats(charStats)
 	print("You have two choices for career from the following list:")
+	print(careers)
 	for x in careers:
 		print(x)
 	choice = input("What is your choice?")
@@ -166,6 +175,9 @@ with con:
 	cur.execute("DROP TABLE IF EXISTS " + skilTab)
 	cur.execute("DROP TABLE IF EXISTS " + abilTab)
 	cur.execute("DROP TABLE IF EXISTS " + spelTab)
+	cur.execute("DROP TABLE IF EXISTS " + equiTab)
+	cur.execute("DROP TABLE IF EXISTS " + weapTab)
+	cur.execute("DROP TABLE IF EXISTS " + armoTab)
 	cur.execute("""CREATE TABLE """ + charName + """
 					(name,race,archtype,phy,spd,str,agl,prw,poi,int,arc,per,willpower,skills,equipment,mat,matpow,rat,ratrange,ratpow,def,arm,lifespiral,featpoints,career1,career2,sex,faith,height,weight,xp,init,commandrange,abilities,spells)
 				""")
@@ -194,5 +206,13 @@ with con:
 	cur.execute('UPDATE ' + charName + ' SET commandrange= "'+ str(cmdrange)+'"')
 	cur.execute('UPDATE ' + charName + ' SET career1= "'+ str(charCareers[0])+'"')
 	cur.execute('UPDATE ' + charName + ' SET career2= "'+ str(charCareers[1])+'"')
-displayStats(charStats)
+	cur.execute('Select * from Tony')
+	rows = cur.fetchall()
+	for z in rows:
+		tempbed.append(z)
+	g = 0
+	while g < len(variables[0]):
+		print(variables[0][g],tempbed[0][g])
+		g+=1
+#displayStats(charStats)
 
