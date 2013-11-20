@@ -154,12 +154,27 @@ if raceEntry == "gobber":
 elif raceEntry == "nyss":
 	initiative += 1
 con = lite.connect('firsttest.db')
+skilTab = str(str(charName) + "Skills")
+abilTab = str(str(charName) + "Ablilities")
+spelTab = str(str(charName) + "Spells")
+equiTab = str(str(charName) + "Equipment")
+weapTab = str(str(charName) + "Weapons")
+armoTab = str(str(charName) + "Armor")
 with con:
 	cur = con.cursor()
 	cur.execute("DROP TABLE IF EXISTS " + charName)
+	cur.execute("DROP TABLE IF EXISTS " + skilTab)
+	cur.execute("DROP TABLE IF EXISTS " + abilTab)
+	cur.execute("DROP TABLE IF EXISTS " + spelTab)
 	cur.execute("""CREATE TABLE """ + charName + """
 					(name,race,archtype,phy,spd,str,agl,prw,poi,int,arc,per,willpower,skills,equipment,mat,matpow,rat,ratrange,ratpow,def,arm,lifespiral,featpoints,career1,career2,sex,faith,height,weight,xp,init,commandrange,abilities,spells)
 				""")
+	cur.execute('CREATE TABLE ' + skilTab + ' (name,linked,description)')
+	cur.execute('CREATE TABLE ' + abilTab + ' (name,preq,description)')
+	cur.execute('CREATE TABLE ' + spelTab + ' (name,cost,range,aoe,pow,up,off,description)')
+	cur.execute('CREATE TABLE ' + equiTab + ' (name,description)')
+	cur.execute('CREATE TABLE ' + weapTab + ' (name,cost,skill,attmod,pow,description)')
+	cur.execute('CREATE TABLE ' + armoTab + ' (name,cost,spdmod,defmod,armmod,description)')
 	cur.execute("INSERT INTO " + charName +"(name) VALUES ('"+ str(charName)+"')")
 	cur.execute('UPDATE ' + charName + ' SET race= "'+ str(raceEntry)+'"')
 	cur.execute('UPDATE ' + charName + ' SET archtype= "'+ str(archEntry)+'"')
