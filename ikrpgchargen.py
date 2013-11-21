@@ -34,7 +34,7 @@ elif os.name == 'posix':
 for each_line in data:
 	careers.append(each_line.rstrip('\n'))
 data.close()
-spamReader = csv.reader(open('variables.txt',newline=''))
+spamReader = csv.reader(open('variables.txt'))
 for row in spamReader:
 	tempbed.append(row)
 for x in tempbed[0]:
@@ -212,7 +212,7 @@ with con:
 		tempbed.append(z)
 	g = 0
 	while g < len(variables[0]):
-		print(variables[0][g],tempbed[0][g])
+		print(variables[g],tempbed[0][g])
 		g+=1
 #displayStats(charStats)
 

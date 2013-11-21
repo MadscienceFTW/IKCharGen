@@ -2,6 +2,8 @@ import sqlite3 as lite
 import sys
 import os
 import csv
+import xml.etree.ElementTree as ET
+
 variables = []
 testbed = []
 con = lite.connect('firsttest.db')
@@ -20,4 +22,11 @@ for row in spamReader:
 	variables.append(row)
 for x in variables[0]:
 	testbed.append(x)
-print(testbed)
+#print(testbed)
+tree = ET.parse('IKTestSheet.svg')
+root = tree.getroot()
+#print(root[4][2][0].attrib) # prints PHY tspan text
+for rank in root[4].findall(".//*[@id='PHY']"):
+	newtext = "Anthony"
+	rank.text = str(newtext)
+tree.write('IKTestSheet.svg')
