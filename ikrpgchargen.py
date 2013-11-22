@@ -211,8 +211,8 @@ with con:
 	for z in rows:
 		tempbed.append(z)
 	g = 0
-	while g < len(variables[0]):
-		print(variables[g],tempbed[0][g])
-		g+=1
+	#while g < len(variables[0]):
+		#print(variables[g],tempbed[0][g])
+		#g+=1
 #displayStats(charStats)
 
