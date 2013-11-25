@@ -27,13 +27,18 @@ trollkinMax = [8,6,7,5,5,4,4,4,4]
 satyxisStats = [5,6,5,3,4,3,3,"-",3,["gifted","mighty","skilled"]]
 satyxisMax = [7,7,7,7,7,7,7,7,7]
 baseRaces = {"human":humanStats,"dwarf":dwarfStats,"gobber":gobberStats,"iosan":iosanStats,"nyss":nyssStats,"ogrun":ogrunStats,"trollkin":trollkinStats,"satyxis":satyxisStats}
-if os.name == 'nt':
-	data = open('f:\\Dev\\IKChargen\\careers.txt')
-elif os.name == 'posix':
-	data = open('/home/ap/Dropbox/Dev/IK/careers.txt')
-for each_line in data:
-	careers.append(each_line.rstrip('\n'))
-data.close()
+#if os.name == 'nt':
+#	data = open('f:\\Dev\\IKChargen\\newcareers.txt')
+#elif os.name == 'posix':
+#	data = open('/home/ap/Dropbox/Dev/IK/careers.txt')
+#for each_line in data:
+#	careers.append(each_line.rstrip('\n'))
+#data.close()
+spaReader = csv.reader(open('newcareers.txt'))
+for row in spaReader:
+	tempbed.append(row)
+for x in tempbed[0]:
+	careers.append(x)
 spamReader = csv.reader(open('variables.txt'))
 for row in spamReader:
 	tempbed.append(row)
@@ -141,7 +146,6 @@ while careerCount > 0:
 	os.system(clearingScreen())
 	displayStats(charStats)
 	print("You have two choices for career from the following list:")
-	print(careers)
 	for x in careers:
 		print(x)
 	choice = input("What is your choice?")
@@ -214,5 +218,5 @@ with con:
 	#while g < len(variables[0]):
 		#print(variables[g],tempbed[0][g])
 		#g+=1
-#displayStats(charStats)
+displayStats(charStats)
 
