@@ -2,13 +2,61 @@ import os
 import sqlite3 as lite
 import sys
 import csv
-class character:
+class Character:
 	name = False
-baseStats = ["PHY","SPD","STR","AGL","PRW","POI","INT","ARC","PER"]
-charStats = []
-charArch = []
+	race = False
+	phy = 0
+	spd = 0
+	spd = 0
+	agl = 0
+	prw = 0
+	poi = 0
+	int = 0
+	arc = 0
+	per = 0
+	def __init__(self):
+		self.charStats = []
+		self.charCareers = []
+		self.baseStats = ["PHY","SPD","STR","AGL","PRW","POI","INT","ARC","PER"]
+	def setName(self, name):
+		self.name = name
+	def setRace(self, race):
+		self.race = race
+	def printStats(self, race):
+		count = 0
+		while count < 9:
+			print(self.baseStats[count] + ":" + str(race[count]))
+			count +=1
+		#print("PHY:" + str(race[0]) + " SPD:" + str(race[1]) + " STR:" + str(race[2]) + 
+		#" AGL:" + str(race[3]) + " PRW:" + str(race[4]) + " POI:" + str(race[5]) 
+		#+ " INT:" + str(race[6]) + " ARC:" + str(race[7]) + " PER:" + str(race[8]))
+	def firstStats(self, race):
+		os.system(clearingScreen())
+		print("Here are that races stats and options:")
+		self.printStats(race)
+		self.displayArch(race)
+	def displayStats(self, race):
+		os.system(clearingScreen())
+		print(self.name.capitalize())
+		print(self.race.capitalize())
+		print(self.printArch(race).capitalize())
+		self.printStats(race)
+		for x in self.charCareers:
+			print(x)
+	def displayArch(self, race):
+		for item in race[9]:
+			print(str(item))
+	def printArch(self, race):
+		return (race[9])
+	def careerChoice(self, choice):
+		count = 0
+		for x in careers:
+			if x == choice:
+				self.charCareers.append(careers[count])
+			else:
+				count+=1
+
 archEntry = []
-charCareers = []
 careers = []
 variables = []
 tempbed = []
@@ -29,13 +77,6 @@ trollkinMax = [8,6,7,5,5,4,4,4,4]
 satyxisStats = [5,6,5,3,4,3,3,"-",3,["gifted","mighty","skilled"]]
 satyxisMax = [7,7,7,7,7,7,7,7,7]
 baseRaces = {"human":humanStats,"dwarf":dwarfStats,"gobber":gobberStats,"iosan":iosanStats,"nyss":nyssStats,"ogrun":ogrunStats,"trollkin":trollkinStats,"satyxis":satyxisStats}
-#if os.name == 'nt':
-#	data = open('f:\\Dev\\IKChargen\\newcareers.txt')
-#elif os.name == 'posix':
-#	data = open('/home/ap/Dropbox/Dev/IK/careers.txt')
-#for each_line in data:
-#	careers.append(each_line.rstrip('\n'))
-#data.close()
 spaReader = csv.reader(open('newcareers.txt'))
 for row in spaReader:
 	tempbed.append(row)
@@ -46,71 +87,45 @@ for row in spamReader:
 	tempbed.append(row)
 for x in tempbed[0]:
 	variables.append(x)
-def displayStats(race):
-	os.system(clearingScreen())
-	print(raceEntry.title())
-	print(printStats(race))
-	print(printArch(race).title())
-	for x in charCareers:
-		print(x)
-def printStats(race):
-	print("PHY:" + str(race[0]) + " SPD:" + str(race[1]) + " STR:" + str(race[2]) + 
-	" AGL:" + str(race[3]) + " PRW:" + str(race[4]) + " POI:" + str(race[5]) 
-	+ " INT:" + str(race[6]) + " ARC:" + str(race[7]) + " PER:" + str(race[8]))
-def firstStats(race):
-	os.system(clearingScreen())
-	print("Here are that races stats and options:")
-	print(printStats(race))
-	displayArch(race)
-def printArch(race):
-	return (race[9])
-def displayArch(race):
-	for item in race[9]:
-		print(str(item))
 def changingStats(race):
 	newStats = list(race)
 	return newStats
-def careerChoice(choice):
-	charCareers.append(careers[careerNumber(choice)])
-def careerNumber(entry):
-	count = 0
-	for x in careers:
-		if x == entry:
-			return count
-		else:
-			count+=1
 def clearingScreen():
 	if os.name == 'nt':
 		return 'cls'
 	elif os.name == 'posix':
 		return 'clear'
+
 charName = input("What is your characters name?")
 if len(charName) < 1:
 	print("That wasn't a long enough name, please try again.")
 	charName = input("What is your characters name?")
 else:
-	print("Thank you")
+	char = Character()
+	char.name = charName
+	print("Thank you, Your character is " + char.name)
 raceCount = 1
 while raceCount > 0:
-	raceEntry = input("What race would you like to play?")
+	raceEntry = input("What race would you like " +char.name + " to be?")
 	raceEntry = raceEntry.lower()
-	if raceEntry == 'human':
-		charStats = changingStats(baseRaces[str(raceEntry)])
+	char.race = raceEntry
+	if char.race == 'human':
+		char.charStats = changingStats(baseRaces[str(char.race)])
 		count = 1
 		while count > 0:
-			firstStats(charStats)
+			char.firstStats(char.charStats)
 			bonus = input("Which Base Stat is your Exceptional Potential? PHY, AGL or INT?")
 			if bonus in ["PHY","AGL","INT"]:
-				upgrade = baseStats.index(bonus)
-				charStats[upgrade]+= 1
+				upgrade = char.baseStats.index(bonus)
+				char.charStats[upgrade]+= 1
 				count -= 1
 			else:
 				print("That isnt upgradable.")
-		firstStats(charStats)
+		char.firstStats(char.charStats)
 		raceCount -= 1
-	elif raceEntry in baseRaces:
-		charStats = changingStats(baseRaces[str(raceEntry)])
-		firstStats(charStats)
+	elif char.race in baseRaces:
+		char.charStats = changingStats(baseRaces[str(char.race)])
+		char.firstStats(char.charStats)
 		raceCount -= 1
 	else:
 		print("That is not one of the IK races.")
@@ -118,27 +133,27 @@ num = 1
 while num > 0:	
 	archEntry = input("Which Archetype would you like to use?")
 	archEntry = archEntry.lower()
-	if archEntry in charStats[9]:
-		charStats[9] = archEntry
+	if archEntry in char.charStats[9]:
+		char.charStats[9] = archEntry
 		os.system(clearingScreen())
-		displayStats(charStats)
+		char.displayStats(char.charStats)
 		num -=1
 		if archEntry == 'gifted':
-			charStats[7] = 0
+			char.charStats[7] = 0
 	else:
 		print("That is not one of the Archetypes available.")
 uppoints = 3
-displayStats(charStats)
+char.displayStats(char.charStats)
 while uppoints > 0:
 	print("You have " + str(uppoints) + " upgrades remaining.")
 	stat = input("Which stat would you like to upgrade?")
 	stat = stat.upper()
-	upgrade = baseStats.index(stat)
-	if charStats[upgrade] != "-":
-		if stat in baseStats:
-			charStats[upgrade]+= 1
+	upgrade = char.baseStats.index(stat)
+	if char.charStats[upgrade] != "-":
+		if stat in char.baseStats:
+			char.charStats[upgrade]+= 1
 			uppoints-=1
-			displayStats(charStats)
+			char.displayStats(char.charStats)
 		else:
 			print("That is not a stat.")
 	else:
@@ -146,45 +161,45 @@ while uppoints > 0:
 careerCount = 2
 while careerCount > 0:
 	os.system(clearingScreen())
-	displayStats(charStats)
+	char.displayStats(char.charStats)
 	print("You have two choices for career from the following list:")
 	for x in careers:
 		print(x)
 	choice = input("What is your choice?")
 	if choice in careers:
-		if choice in charCareers:
+		if choice in char.charCareers:
 			print("You already chose that career.")
 		else:
-			careerChoice(choice)
+			char.careerChoice(choice)
 			careerCount-=1
 	else:
 		print("That is not a selectable career.")
-willpower = charStats[0] + charStats[6]
-initiative = charStats[1] + charStats[4] + charStats[8]
-defense = charStats[1] + charStats[3] + charStats[8]
-armor = charStats[0]
-cmdrange = charStats[6]
-if raceEntry == "gobber":
+willpower = char.charStats[0] + char.charStats[6]
+initiative = char.charStats[1] + char.charStats[4] + char.charStats[8]
+defense = char.charStats[1] + char.charStats[3] + char.charStats[8]
+armor = char.charStats[0]
+cmdrange = char.charStats[6]
+if char.race == "gobber":
 	defense += 1
-elif raceEntry == "nyss":
+elif char.race == "nyss":
 	initiative += 1
 con = lite.connect('firsttest.db')
-skilTab = str(str(charName) + "Skills")
-abilTab = str(str(charName) + "Ablilities")
-spelTab = str(str(charName) + "Spells")
-equiTab = str(str(charName) + "Equipment")
-weapTab = str(str(charName) + "Weapons")
-armoTab = str(str(charName) + "Armor")
+skilTab = str(str(char.name) + "Skills")
+abilTab = str(str(char.name) + "Ablilities")
+spelTab = str(str(char.name) + "Spells")
+equiTab = str(str(char.name) + "Equipment")
+weapTab = str(str(char.name) + "Weapons")
+armoTab = str(str(char.name) + "Armor")
 with con:
 	cur = con.cursor()
-	cur.execute("DROP TABLE IF EXISTS " + charName)
+	cur.execute("DROP TABLE IF EXISTS " + char.name)
 	cur.execute("DROP TABLE IF EXISTS " + skilTab)
 	cur.execute("DROP TABLE IF EXISTS " + abilTab)
 	cur.execute("DROP TABLE IF EXISTS " + spelTab)
 	cur.execute("DROP TABLE IF EXISTS " + equiTab)
 	cur.execute("DROP TABLE IF EXISTS " + weapTab)
 	cur.execute("DROP TABLE IF EXISTS " + armoTab)
-	cur.execute("""CREATE TABLE """ + charName + """
+	cur.execute("""CREATE TABLE """ + char.name + """
 					(name,race,archtype,phy,spd,str,agl,prw,poi,int,arc,per,willpower,skills,equipment,mat,matpow,rat,ratrange,ratpow,def,arm,lifespiral,featpoints,career1,career2,sex,faith,height,weight,xp,init,commandrange,abilities,spells)
 				""")
 	cur.execute('CREATE TABLE ' + skilTab + ' (name,linked,description)')
@@ -193,25 +208,25 @@ with con:
 	cur.execute('CREATE TABLE ' + equiTab + ' (name,description)')
 	cur.execute('CREATE TABLE ' + weapTab + ' (name,cost,skill,attmod,pow,description)')
 	cur.execute('CREATE TABLE ' + armoTab + ' (name,cost,spdmod,defmod,armmod,description)')
-	cur.execute("INSERT INTO " + charName +"(name) VALUES ('"+ str(charName)+"')")
-	cur.execute('UPDATE ' + charName + ' SET race= "'+ str(raceEntry)+'"')
-	cur.execute('UPDATE ' + charName + ' SET archtype= "'+ str(archEntry)+'"')
-	cur.execute('UPDATE ' + charName + ' SET phy= "'+ str(charStats[0])+'"')
-	cur.execute('UPDATE ' + charName + ' SET spd= "'+ str(charStats[1])+'"')
-	cur.execute('UPDATE ' + charName + ' SET str= "'+ str(charStats[2])+'"')
-	cur.execute('UPDATE ' + charName + ' SET agl= "'+ str(charStats[3])+'"')
-	cur.execute('UPDATE ' + charName + ' SET prw= "'+ str(charStats[4])+'"')
-	cur.execute('UPDATE ' + charName + ' SET poi= "'+ str(charStats[5])+'"')
-	cur.execute('UPDATE ' + charName + ' SET int= "'+ str(charStats[6])+'"')
-	cur.execute('UPDATE ' + charName + ' SET arc= "'+ str(charStats[7])+'"')
-	cur.execute('UPDATE ' + charName + ' SET per= "'+ str(charStats[8])+'"')
-	cur.execute('UPDATE ' + charName + ' SET willpower= "'+ str(willpower)+'"')
-	cur.execute('UPDATE ' + charName + ' SET init= "'+ str(initiative)+'"')
-	cur.execute('UPDATE ' + charName + ' SET def= "'+ str(defense)+'"')
-	cur.execute('UPDATE ' + charName + ' SET arm= "'+ str(armor)+'"')
-	cur.execute('UPDATE ' + charName + ' SET commandrange= "'+ str(cmdrange)+'"')
-	cur.execute('UPDATE ' + charName + ' SET career1= "'+ str(charCareers[0])+'"')
-	cur.execute('UPDATE ' + charName + ' SET career2= "'+ str(charCareers[1])+'"')
+	cur.execute("INSERT INTO " + char.name +"(name) VALUES ('"+ str(char.name)+"')")
+	cur.execute('UPDATE ' + char.name + ' SET race= "'+ str(char.race)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET archtype= "'+ str(archEntry)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET phy= "'+ str(char.charStats[0])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET spd= "'+ str(char.charStats[1])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET str= "'+ str(char.charStats[2])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET agl= "'+ str(char.charStats[3])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET prw= "'+ str(char.charStats[4])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET poi= "'+ str(char.charStats[5])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET int= "'+ str(char.charStats[6])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET arc= "'+ str(char.charStats[7])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET per= "'+ str(char.charStats[8])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET willpower= "'+ str(willpower)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET init= "'+ str(initiative)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET def= "'+ str(defense)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET arm= "'+ str(armor)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET commandrange= "'+ str(cmdrange)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET career1= "'+ str(char.charCareers[0])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET career2= "'+ str(char.charCareers[1])+'"')
 	cur.execute('Select * from Tony')
 	rows = cur.fetchall()
 	for z in rows:
@@ -220,5 +235,5 @@ with con:
 	#while g < len(variables[0]):
 		#print(variables[g],tempbed[0][g])
 		#g+=1
-displayStats(charStats)
+char.displayStats(char.charStats)
 
