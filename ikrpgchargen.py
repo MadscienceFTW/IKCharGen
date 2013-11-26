@@ -60,6 +60,7 @@ archEntry = []
 careers = []
 variables = []
 tempbed = []
+tembed = []
 humanStats = [5,6,4,3,4,4,3,"-",3,["gifted","intellectual","mighty","skilled"]]
 humanMax = [7,7,6,5,5,5,5,4,5]
 dwarfStats = [6,4,5,3,4,3,4,"-",3,["gifted","intellectual","mighty","skilled"]]
@@ -84,8 +85,8 @@ for x in tempbed[0]:
 	careers.append(x)
 spamReader = csv.reader(open('variables.txt'))
 for row in spamReader:
-	tempbed.append(row)
-for x in tempbed[0]:
+	tembed.append(row)
+for x in tembed[0]:
 	variables.append(x)
 def changingStats(race):
 	newStats = list(race)
@@ -233,13 +234,16 @@ with con:
 	cur.execute('Select * from Tony')
 	rows = cur.fetchall()
 	generic = []
-	for z in rows:
-		generic.append(z)
-	for u in generic[0]:
-		print(u)
+	reliable = []
+	for u in rows[0]:
+		generic.append(u)
+	cur.execute('PRAGMA table_info(Tony)')
+	lines = cur.fetchall()
+	for j in lines:
+		reliable.append(j[1])
 	g = 0
-	#while g < len(variables[0]):
-		#print(variables[g],tempbed[0][g])
-		#g+=1
+	while g < len(variables):
+		print('{:<12} {:}'.format(reliable[g],generic[g]))
+		g+=1
 #char.displayStats(char.charStats)
 
