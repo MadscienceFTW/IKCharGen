@@ -1,7 +1,7 @@
 import sqlite3 as lite
 import sys
 
-con = lite.connect('firsttest.db')
+con = lite.connect('defaults.db')
 
 maxes = (
 	("HumanHero",7,7,6,5,5,5,5,4,5),

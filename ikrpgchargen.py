@@ -148,14 +148,17 @@ while uppoints > 0:
 	print("You have " + str(uppoints) + " upgrades remaining.")
 	stat = input("Which stat would you like to upgrade?")
 	stat = stat.upper()
-	upgrade = char.baseStats.index(stat)
+	if stat in char.baseStats:
+		upgrade = char.baseStats.index(stat)
+	else:
+		print("That is not a stat.")
+		stat = input("Which stat would you like to upgrade?")
+		stat = stat.upper()
 	if char.charStats[upgrade] != "-":
 		if stat in char.baseStats:
 			char.charStats[upgrade]+= 1
 			uppoints-=1
 			char.displayStats(char.charStats)
-		else:
-			print("That is not a stat.")
 	else:
 		print("Can't do that")
 careerCount = 2
@@ -184,12 +187,12 @@ if char.race == "gobber":
 elif char.race == "nyss":
 	initiative += 1
 con = lite.connect('firsttest.db')
-skilTab = str(str(char.name) + "Skills")
-abilTab = str(str(char.name) + "Ablilities")
-spelTab = str(str(char.name) + "Spells")
-equiTab = str(str(char.name) + "Equipment")
-weapTab = str(str(char.name) + "Weapons")
-armoTab = str(str(char.name) + "Armor")
+skilTab = str(char.name + "Skills")
+abilTab = str(char.name + "Abilities")
+spelTab = str(char.name + "Spells")
+equiTab = str(char.name + "Equipment")
+weapTab = str(char.name + "Weapons")
+armoTab = str(char.name + "Armor")
 with con:
 	cur = con.cursor()
 	cur.execute("DROP TABLE IF EXISTS " + char.name)
@@ -229,11 +232,14 @@ with con:
 	cur.execute('UPDATE ' + char.name + ' SET career2= "'+ str(char.charCareers[1])+'"')
 	cur.execute('Select * from Tony')
 	rows = cur.fetchall()
+	generic = []
 	for z in rows:
-		tempbed.append(z)
+		generic.append(z)
+	for u in generic[0]:
+		print(u)
 	g = 0
 	#while g < len(variables[0]):
 		#print(variables[g],tempbed[0][g])
 		#g+=1
-char.displayStats(char.charStats)
+#char.displayStats(char.charStats)
 

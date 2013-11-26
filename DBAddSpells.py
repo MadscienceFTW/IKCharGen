@@ -3,7 +3,7 @@ import sys
 import os
 import csv
 
-con = lite.connect('firsttest.db')
+con = lite.connect('defaults.db')
 
 with con:
 	cur = con.cursor() 
