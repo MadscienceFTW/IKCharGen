@@ -2,6 +2,8 @@ import os
 import sqlite3 as lite
 import sys
 import csv
+class character:
+	name = False
 baseStats = ["PHY","SPD","STR","AGL","PRW","POI","INT","ARC","PER"]
 charStats = []
 charArch = []
