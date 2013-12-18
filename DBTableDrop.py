@@ -3,7 +3,7 @@ import sys
 
 con = lite.connect('firsttest.db')
 skilTab = str(str(sys.argv[1]) + "Skills")
-abilTab = str(str(sys.argv[1]) + "Ablilities")
+abilTab = str(str(sys.argv[1]) + "Abilities")
 spelTab = str(str(sys.argv[1]) + "Spells")
 equiTab = str(str(sys.argv[1]) + "Equipment")
 weapTab = str(str(sys.argv[1]) + "Weapons")
