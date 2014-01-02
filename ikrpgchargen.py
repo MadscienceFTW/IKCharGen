@@ -2,11 +2,13 @@ import os
 import sqlite3 as lite
 import sys
 import csv
+from tkinter import *
+from tkinter import ttk
 class Character:
 	name = False
 	race = False
 	phy = 0
-	spd = 0
+	str = 0
 	spd = 0
 	agl = 0
 	prw = 0
@@ -246,4 +248,3 @@ with con:
 		print('{:<12} {:}'.format(reliable[g],generic[g]))
 		g+=1
 #char.displayStats(char.charStats)
-
