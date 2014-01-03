@@ -8,12 +8,12 @@ class Character:
 	name = False
 	race = False
 	phy = 0
-	str = 0
+	stg = 0
 	spd = 0
 	agl = 0
 	prw = 0
 	poi = 0
-	int = 0
+	itl = 0
 	arc = 0
 	per = 0
 	def __init__(self):
