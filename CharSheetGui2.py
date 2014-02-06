@@ -1,15 +1,5 @@
 from tkinter import *
 from tkinter import ttk
-races = ["Human", "Dwarf", "Gobber", "Nyss", "Iosan", "Trollkin", "Ogrun", "Satyxis"]
-raceArch = []
-careers = []
-def getRace():
-	try:
-		alpha = races.selection()
-		raceArch = ["Gifted", "Mighty", "Intellectual", "Skilled"]
-		print(alpha)
-	except ValueError:
-		pass
 
 root = Tk()
 root.title("Race Stats")
@@ -33,9 +23,9 @@ subframe.columnconfigure(0, weight=1)
 subframe.rowconfigure(0, weight=1)
 
 ttk.Label(subframe, text="Career1").grid(column=1, row=1)
-ttk.Combobox(subframe, text=careers).grid(column=2, row=1)
+ttk.Combobox(subframe, values=careers).grid(column=2, row=1)
 ttk.Label(subframe, text="Career2").grid(column=3, row=1)
-ttk.Combobox(subframe, text=careers).grid(column=4, row=1)
+ttk.Combobox(subframe, values=careers).grid(column=4, row=1)
 
 attframe = ttk.Frame(root, padding="3 3 12 12")
 attframe.grid(column=0, row=2, sticky=W)
