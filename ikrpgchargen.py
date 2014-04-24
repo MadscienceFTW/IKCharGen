@@ -8,6 +8,8 @@ class Character:
 	name = False
 	race = False
 	archetype = False
+	career1 = False
+	career2 = False
 	phy = 0
 	stg = 0
 	spd = 0
@@ -19,7 +21,8 @@ class Character:
 	per = 0
 	def __init__(self):
 		self.charStats = []
-		self.charCareers = []
+		self.career1 = False
+		self.career2 = False
 		self.baseStats = ["PHY","SPD","STR","AGL","PRW","POI","INT","ARC","PER"]
 	def setName(self, name):
 		self.name = name
@@ -44,8 +47,8 @@ class Character:
 		print(self.race.capitalize())
 		print(self.printArch(race).capitalize())
 		self.printStats(race)
-		for x in self.charCareers:
-			print(x)
+		print(self.career1)
+		print(self.career2)
 	def displayArch(self, race):
 		for item in race[9]:
 			print(str(item))
@@ -166,8 +169,8 @@ while uppoints > 0:
 			char.displayStats(char.charStats)
 	else:
 		print("Can't do that")
-careerCount = 2
-while careerCount > 0:
+
+while char.career1 == False and char.career2 == False:
 	os.system(clearingScreen())
 	char.displayStats(char.charStats)
 	print("You have two choices for career from the following list:")
@@ -175,18 +178,19 @@ while careerCount > 0:
 		print(x)
 	choice = input("What is your choice?")
 	if choice in careers:
-		if choice in char.charCareers:
+		if choice in char.career1 or char.career2:
 			print("You already chose that career.")
+		elif char.career1 == False:
+			char.career1 = choice
 		else:
-			char.careerChoice(choice)
-			careerCount-=1
+			char.career2 = choice
 	else:
 		print("That is not a selectable career.")
-willpower = char.charStats[0] + char.charStats[6]
-initiative = char.charStats[1] + char.charStats[4] + char.charStats[8]
-defense = char.charStats[1] + char.charStats[3] + char.charStats[8]
-armor = char.charStats[0]
-cmdrange = char.charStats[6]
+willpower = char.phy + char.itl
+initiative = char.spd + char.prw + char.per
+defense = char.spd + char.agl + char.per
+armor = char.phy
+cmdrange = char.itl
 if char.race == "gobber":
 	defense += 1
 elif char.race == "nyss":
@@ -219,22 +223,22 @@ with con:
 	cur.execute("INSERT INTO " + char.name +"(name) VALUES ('"+ str(char.name)+"')")
 	cur.execute('UPDATE ' + char.name + ' SET race= "'+ str(char.race)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET archtype= "'+ str(archEntry)+'"')
-	cur.execute('UPDATE ' + char.name + ' SET phy= "'+ str(char.charStats[0])+'"')
-	cur.execute('UPDATE ' + char.name + ' SET spd= "'+ str(char.charStats[1])+'"')
-	cur.execute('UPDATE ' + char.name + ' SET str= "'+ str(char.charStats[2])+'"')
-	cur.execute('UPDATE ' + char.name + ' SET agl= "'+ str(char.charStats[3])+'"')
-	cur.execute('UPDATE ' + char.name + ' SET prw= "'+ str(char.charStats[4])+'"')
-	cur.execute('UPDATE ' + char.name + ' SET poi= "'+ str(char.charStats[5])+'"')
-	cur.execute('UPDATE ' + char.name + ' SET int= "'+ str(char.charStats[6])+'"')
-	cur.execute('UPDATE ' + char.name + ' SET arc= "'+ str(char.charStats[7])+'"')
-	cur.execute('UPDATE ' + char.name + ' SET per= "'+ str(char.charStats[8])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET phy= "'+ str(char.phy)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET spd= "'+ str(char.spd)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET str= "'+ str(char.stg)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET agl= "'+ str(char.agl)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET prw= "'+ str(char.prw)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET poi= "'+ str(char.poi)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET int= "'+ str(char.itl)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET arc= "'+ str(char.arc)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET per= "'+ str(char.per)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET willpower= "'+ str(willpower)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET init= "'+ str(initiative)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET def= "'+ str(defense)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET arm= "'+ str(armor)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET commandrange= "'+ str(cmdrange)+'"')
-	cur.execute('UPDATE ' + char.name + ' SET career1= "'+ str(char.charCareers[0])+'"')
-	cur.execute('UPDATE ' + char.name + ' SET career2= "'+ str(char.charCareers[1])+'"')
+	cur.execute('UPDATE ' + char.name + ' SET career1= "'+ str(char.career1)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET career2= "'+ str(char.career2)+'"')
 	cur.execute('Select * from Tony')
 	"""rows = cur.fetchall()
 	generic = []
