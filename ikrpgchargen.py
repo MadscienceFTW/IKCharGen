@@ -19,6 +19,11 @@ class Character:
 	itl = 0
 	arc = 0
 	per = 0
+	willpower = 0
+	initiative = 0
+	defense = spd + agl + per
+	armor = phy
+	cmdrange = itl
 	def __init__(self):
 		self.charStats = []
 		self.career1 = False
@@ -28,14 +33,23 @@ class Character:
 		self.name = name
 	def setRace(self, race):
 		self.race = race
+	def setStats(self):
+		self.phy = self.charStats[0]
+		self.spd = self.charStats[1]
+		self.stg = self.charStats[2]
+		self.agl = self.charStats[3]
+		self.prw = self.charStats[4]
+		self.poi = self.charStats[5]
+		self.itl = self.charStats[6]
+		self.arc = self.charStats[7]
+		self.per = self.charStats[8]
 	def printStats(self, race):
 		count = 0
 		while count < 9:
 			print(self.baseStats[count] + ":" + str(race[count]))
 			count +=1
-		#print("PHY:" + str(race[0]) + " SPD:" + str(race[1]) + " STR:" + str(race[2]) + 
-		#" AGL:" + str(race[3]) + " PRW:" + str(race[4]) + " POI:" + str(race[5]) 
-		#+ " INT:" + str(race[6]) + " ARC:" + str(race[7]) + " PER:" + str(race[8]))
+	def newPrintStats(self, race):
+		print(self.baseStats[0] + " : " + self.phy)
 	def firstStats(self, race):
 		os.system(clearingScreen())
 		print("Here are that races stats and options:")
@@ -61,7 +75,16 @@ class Character:
 				self.charCareers.append(careers[count])
 			else:
 				count+=1
-
+	def finalStats(self):
+		self.willpower = self.phy + self.itl
+		self.initiative = self.spd + self.prw + self.per
+		self.defense = self.spd + self.agl + self.per
+		self.armor = self.phy
+		self.cmdrange = self.itl
+		if self.race == "gobber":
+			self.defense += 1
+		elif self.race == "nyss":
+			self.initiative += 1
 archEntry = []
 careers = []
 variables = []
@@ -118,6 +141,7 @@ while raceCount > 0:
 	char.race = raceEntry
 	if char.race == 'human':
 		char.charStats = changingStats(baseRaces[str(char.race)])
+		char.setStats()
 		count = 1
 		while count > 0:
 			char.firstStats(char.charStats)
@@ -133,6 +157,7 @@ while raceCount > 0:
 	elif char.race in baseRaces:
 		char.charStats = changingStats(baseRaces[str(char.race)])
 		char.firstStats(char.charStats)
+		char.setStats()
 		raceCount -= 1
 	else:
 		print("That is not one of the IK races.")
@@ -173,28 +198,25 @@ while uppoints > 0:
 while char.career1 == False and char.career2 == False:
 	os.system(clearingScreen())
 	char.displayStats(char.charStats)
-	print("You have two choices for career from the following list:")
-	for x in careers:
-		print(x)
-	choice = input("What is your choice?")
-	if choice in careers:
-		if choice in char.career1 or char.career2:
-			print("You already chose that career.")
-		elif char.career1 == False:
-			char.career1 = choice
+	count = 2
+	while count > 0:
+		print("You have two choices for career from the following list:")
+		for x in careers:
+			print(x)
+		choice = input("What is your choice?")
+		if choice in careers:
+			if char.career1 == choice or char.career2 == choice:
+				print("You already chose that career.")
+			elif char.career1 == False:
+				char.career1 = choice
+				count -= 1
+			else:
+				char.career2 = choice
+				count -= 1
 		else:
-			char.career2 = choice
-	else:
-		print("That is not a selectable career.")
-willpower = char.phy + char.itl
-initiative = char.spd + char.prw + char.per
-defense = char.spd + char.agl + char.per
-armor = char.phy
-cmdrange = char.itl
-if char.race == "gobber":
-	defense += 1
-elif char.race == "nyss":
-	initiative += 1
+			print("That is not a selectable career.")
+os.system(clearingScreen())
+char.finalStats()
 con = lite.connect('firsttest.db')
 skilTab = str(char.name + "Skills")
 abilTab = str(char.name + "Abilities")
@@ -232,11 +254,11 @@ with con:
 	cur.execute('UPDATE ' + char.name + ' SET int= "'+ str(char.itl)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET arc= "'+ str(char.arc)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET per= "'+ str(char.per)+'"')
-	cur.execute('UPDATE ' + char.name + ' SET willpower= "'+ str(willpower)+'"')
-	cur.execute('UPDATE ' + char.name + ' SET init= "'+ str(initiative)+'"')
-	cur.execute('UPDATE ' + char.name + ' SET def= "'+ str(defense)+'"')
-	cur.execute('UPDATE ' + char.name + ' SET arm= "'+ str(armor)+'"')
-	cur.execute('UPDATE ' + char.name + ' SET commandrange= "'+ str(cmdrange)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET willpower= "'+ str(char.willpower)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET init= "'+ str(char.initiative)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET def= "'+ str(char.defense)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET arm= "'+ str(char.armor)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET commandrange= "'+ str(char.cmdrange)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET career1= "'+ str(char.career1)+'"')
 	cur.execute('UPDATE ' + char.name + ' SET career2= "'+ str(char.career2)+'"')
 	cur.execute('Select * from Tony')
@@ -278,9 +300,9 @@ subframe['borderwidth'] = 3
 subframe['relief'] = 'sunken'
 
 ttk.Label(subframe, text="Career1:").grid(column=1, row=1)
-ttk.Label(subframe, text=char.charCareers[0]).grid(column=2, row=1)
+ttk.Label(subframe, text=char.career1).grid(column=2, row=1)
 ttk.Label(subframe, text="Career2:").grid(column=3, row=1)
-ttk.Label(subframe, text=char.charCareers[1]).grid(column=4, row=1)
+ttk.Label(subframe, text=char.career2).grid(column=4, row=1)
 
 att = ttk.Frame(root, padding="3 3 12 12")
 att.grid(column=0, row=2, sticky=W)
@@ -288,38 +310,38 @@ att['borderwidth'] = 4
 att['relief'] = 'raised'
 
 ttk.Label(att, text="PHY:").grid(column=1, row=2, sticky=W)
-ttk.Label(att, text=char.charStats[0]).grid(column=2, row=2, sticky=W)
+ttk.Label(att, text=char.phy).grid(column=2, row=2, sticky=W)
 ttk.Label(att, text="SPD:").grid(column=3, row=1)
-ttk.Label(att, text=char.charStats[1]).grid(column=4, row=1)
+ttk.Label(att, text=char.spd).grid(column=4, row=1)
 ttk.Label(att, text="STR:").grid(column=3, row=3)
-ttk.Label(att, text=char.charStats[2]).grid(column=4, row=3)
+ttk.Label(att, text=char.stg).grid(column=4, row=3)
 ttk.Label(att, text="AGL:").grid(column=1, row=5, sticky=W)
-ttk.Label(att, text=char.charStats[3]).grid(column=2, row=5, sticky=W)
+ttk.Label(att, text=char.agl).grid(column=2, row=5, sticky=W)
 ttk.Label(att, text="PRW:").grid(column=3, row=4)
-ttk.Label(att, text=char.charStats[4]).grid(column=4, row=4)
+ttk.Label(att, text=char.prw).grid(column=4, row=4)
 ttk.Label(att, text="POI:").grid(column=3, row=6)
-ttk.Label(att, text=char.charStats[5]).grid(column=4, row=6)
+ttk.Label(att, text=char.poi).grid(column=4, row=6)
 ttk.Label(att, text="INT:").grid(column=1, row=8, sticky=W)
-ttk.Label(att, text=char.charStats[6]).grid(column=2, row=8, sticky=W)
+ttk.Label(att, text=char.itl).grid(column=2, row=8, sticky=W)
 ttk.Label(att, text="ARC:").grid(column=3, row=7)
-ttk.Label(att, text=char.charStats[7]).grid(column=4, row=7)
+ttk.Label(att, text=char.arc).grid(column=4, row=7)
 ttk.Label(att, text="PER:").grid(column=3, row=9)
-ttk.Label(att, text=char.charStats[8]).grid(column=4, row=9)
+ttk.Label(att, text=char.per).grid(column=4, row=9)
 
 derived = ttk.Frame(root, padding="3 3 12 12")
 derived.grid(column=1, row=2, sticky=(W, E))
 derived['borderwidth'] = 2
 derived['relief'] = 'sunken'
 ttk.Label(derived, text="Def:").grid(column=1, row=1, sticky=W)
-ttk.Label(derived, text=defense).grid(column=2, row=1, sticky=W)
+ttk.Label(derived, text=char.defense).grid(column=2, row=1, sticky=W)
 ttk.Label(derived, text="Arm:").grid(column=1, row=2, sticky=W)
-ttk.Label(derived, text=armor).grid(column=2, row=2, sticky=W)
+ttk.Label(derived, text=char.armor).grid(column=2, row=2, sticky=W)
 ttk.Label(derived, text="Init:").grid(column=1, row=3, sticky=W)
-ttk.Label(derived, text=initiative).grid(column=2, row=3, sticky=W)
+ttk.Label(derived, text=char.initiative).grid(column=2, row=3, sticky=W)
 ttk.Label(derived, text="CMD:").grid(column=1, row=4, sticky=W)
-ttk.Label(derived, text=cmdrange).grid(column=2, row=4, sticky=W)
+ttk.Label(derived, text=char.cmdrange).grid(column=2, row=4, sticky=W)
 ttk.Label(derived, text="WP:").grid(column=1, row=5, sticky=W)
-ttk.Label(derived, text=willpower).grid(column=2, row=5, sticky=W)
+ttk.Label(derived, text=char.willpower).grid(column=2, row=5, sticky=W)
 
 for child in mainframe.winfo_children(): child.grid_configure(padx=5, pady=5)
 
