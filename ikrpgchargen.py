@@ -21,14 +21,12 @@ class Character:
 	per = 0
 	willpower = 0
 	initiative = 0
-	defense = spd + agl + per
-	armor = phy
-	cmdrange = itl
+	defense = 0
+	armor = 0
+	cmdrange = 0
+	baseStats = ["PHY","SPD","STR","AGL","PRW","POI","INT","ARC","PER"]
 	def __init__(self):
 		self.charStats = []
-		self.career1 = False
-		self.career2 = False
-		self.baseStats = ["PHY","SPD","STR","AGL","PRW","POI","INT","ARC","PER"]
 	def setName(self, name):
 		self.name = name
 	def setRace(self, race):
@@ -49,7 +47,15 @@ class Character:
 			print(self.baseStats[count] + ":" + str(race[count]))
 			count +=1
 	def newPrintStats(self, race):
-		print(self.baseStats[0] + " : " + self.phy)
+		print(self.baseStats[0] + ": " + str(self.phy))
+		print(self.baseStats[1] + ": " + str(self.spd))
+		print(self.baseStats[2] + ": " + str(self.stg))
+		print(self.baseStats[3] + ": " + str(self.agl))
+		print(self.baseStats[4] + ": " + str(self.prw))
+		print(self.baseStats[5] + ": " + str(self.poi))
+		print(self.baseStats[6] + ": " + str(self.itl))
+		print(self.baseStats[7] + ": " + str(self.arc))
+		print(self.baseStats[8] + ": " + str(self.per))
 	def firstStats(self, race):
 		os.system(clearingScreen())
 		print("Here are that races stats and options:")
@@ -60,7 +66,7 @@ class Character:
 		print(self.name.capitalize())
 		print(self.race.capitalize())
 		print(self.printArch(race).capitalize())
-		self.printStats(race)
+		self.newPrintStats(race)
 		print(self.career1)
 		print(self.career2)
 	def displayArch(self, race):
