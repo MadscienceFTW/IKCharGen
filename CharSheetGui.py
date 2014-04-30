@@ -1,20 +1,36 @@
+import sqlite3 as lite
 from tkinter import *
 from tkinter import ttk
 races = ["Human", "Dwarf", "Gobber", "Nyss", "Iosan", "Trollkin", "Ogrun", "Satyxis"]
+hdiArch = ["Gifted", "Mighty", "Intellectual", "Skilled"]
+ntsArch = ["Gifted", "Mighty", "Skilled"]
+gobArch = ["Mighty", "Intellectual", "Skilled"]
+orgArch = ["Mighty", "Skilled"]
 raceArch = []
 careers = []
-def getRace():
+def setArch():
 	try:
-		alpha = races.selection()
-		raceArch = ["Gifted", "Mighty", "Intellectual", "Skilled"]
-		print(alpha)
+		alpha = raceEntry.get()
+		if alpha == 'Human' or 'Dwarf' or 'Iosan':
+			archEntry.set(hdiArch)
+		elif alpha == 'Nyss' or 'Trollkin' or 'Satyxis':
+			archEntry.set(ntsArch)
+		elif alpha == 'Gobber':
+			archEntry.set(gobArch)
+		else:
+			archEntry.set(orgArch)
 	except ValueError:
 		pass
+def getStats():
+	beta = archEntry.get()
+	alpha = raceEntry.get()
+	print(alpha)
+	print(beta)
 con = lite.connect('firsttest.db')
-with con:
+"""with con:
 	cur = con.cursor()
 	cur.execute('Select * from Tony')
-		"""rows = cur.fetchall()
+		rows = cur.fetchall()
 		generic = []
 		reliable = []
 		for u in rows[0]:
@@ -38,10 +54,15 @@ mainframe.rowconfigure(0, weight=1)
 ttk.Label(mainframe, text="Name").grid(column=1, row=1)
 ttk.Entry(mainframe).grid(column=2, row=1)
 ttk.Label(mainframe, text="Race").grid(column=3, row=1)
-raceEntry = ttk.Combobox(mainframe, values=races).grid(column=4, row=1)
+raceEntry = ttk.Combobox(mainframe, values=races)
+raceEntry.grid(column=4, row=1)
 ttk.Label(mainframe, text="Archetype").grid(column=5, row=1)
-ttk.Combobox(mainframe, values=raceArch).grid(column=6, row=1)
-ttk.Button(mainframe, text="GetRace", command=getRace).grid(column=7, row=1)
+archEntry = ttk.Combobox(mainframe, values=raceArch)
+archEntry.grid(column=6, row=1)
+setarchbutton = ttk.Button(mainframe, text="SetArch", command=setArch)
+setarchbutton.grid(column=7, row=1)
+getstatsbutton = ttk.Button(mainframe, text="Stats", command=getStats)
+getstatsbutton.grid(column=7, row=2)
 
 subframe = ttk.Frame(root, padding="3 3 12 12")
 subframe.grid(column=0, row=1, sticky=W)
@@ -49,19 +70,24 @@ subframe.columnconfigure(0, weight=1)
 subframe.rowconfigure(0, weight=1)
 
 ttk.Label(subframe, text="Career1").grid(column=1, row=1)
-ttk.Combobox(subframe, text=careers).grid(column=2, row=1)
+career1box = ttk.Combobox(subframe, text=careers)
+career1box.grid(column=2, row=1)
 ttk.Label(subframe, text="Career2").grid(column=3, row=1)
-ttk.Combobox(subframe, text=careers).grid(column=4, row=1)
+career2box = ttk.Combobox(subframe, text=careers)
+career2box.grid(column=4, row=1)
 
 attframe = ttk.Frame(root, padding="3 3 12 12")
 attframe.grid(column=0, row=2, sticky=W)
 
 ttk.Label(attframe, text="PHY:").grid(column=1, row=2, sticky=W)
-ttk.Label(attframe, text=1).grid(column=2, row=2)
+physstat = ttk.Label(attframe, text=1)
+physstat.grid(column=2, row=2)
 ttk.Label(attframe, text="SPD:").grid(column=3, row=1, sticky=(N,E))
-ttk.Label(attframe, text=2).grid(column=4, row=1)
+spdstat = ttk.Label(attframe, text=2)
+spdstat.grid(column=4, row=1)
 ttk.Label(attframe, text="STR:").grid(column=3, row=3, sticky=E)
-ttk.Label(attframe, text=3).grid(column=4, row=3)
+strstat = ttk.Label(attframe, text=3)
+strstat.grid(column=4, row=3)
 
 
 for child in mainframe.winfo_children(): child.grid_configure(padx=5, pady=5)
