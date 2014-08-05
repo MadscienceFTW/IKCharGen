@@ -10,7 +10,6 @@ Fell Caller
 Field Mechanik
 Gun Mage
 Highwayman
-
 Investigator
 Iron Fang
 Knight
@@ -22,7 +21,6 @@ Priest of Morrow
 Priest of Menoth
 Rifleman
 Soldier
-
 Sorcerer
 Spy
 Stormblade

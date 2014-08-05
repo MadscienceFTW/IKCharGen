@@ -26,8 +26,8 @@ def getStats():
 	alpha = raceEntry.get()
 	print(alpha)
 	print(beta)
-con = lite.connect('firsttest.db')
-"""with con:
+"""con = lite.connect('firsttest.db')
+with con:
 	cur = con.cursor()
 	cur.execute('Select * from Tony')
 		rows = cur.fetchall()

@@ -2,7 +2,8 @@ import os
 import sqlite3 as lite
 import sys
 import csv
-
+from tkinter import *
+from tkinter import ttk
 class Character:
 	name = False
 	race = False
@@ -220,3 +221,132 @@ while char.career1 == False and char.career2 == False:
 			print("That is not a selectable career.")
 os.system(clearingScreen())
 char.finalStats()
+con = lite.connect('firsttest.db')
+skilTab = str(char.name + "Skills")
+abilTab = str(char.name + "Abilities")
+spelTab = str(char.name + "Spells")
+equiTab = str(char.name + "Equipment")
+weapTab = str(char.name + "Weapons")
+armoTab = str(char.name + "Armor")
+with con:
+	cur = con.cursor()
+	cur.execute("DROP TABLE IF EXISTS " + char.name)
+	cur.execute("DROP TABLE IF EXISTS " + skilTab)
+	cur.execute("DROP TABLE IF EXISTS " + abilTab)
+	cur.execute("DROP TABLE IF EXISTS " + spelTab)
+	cur.execute("DROP TABLE IF EXISTS " + equiTab)
+	cur.execute("DROP TABLE IF EXISTS " + weapTab)
+	cur.execute("DROP TABLE IF EXISTS " + armoTab)
+	cur.execute("""CREATE TABLE """ + char.name + """
+					(name,race,archtype,phy,spd,str,agl,prw,poi,int,arc,per,willpower,skills,equipment,mat,matpow,rat,ratrange,ratpow,def,arm,lifespiral,featpoints,career1,career2,sex,faith,height,weight,xp,init,commandrange,abilities,spells)
+				""")
+	cur.execute('CREATE TABLE ' + skilTab + ' (name,linked,description)')
+	cur.execute('CREATE TABLE ' + abilTab + ' (name,preq,description)')
+	cur.execute('CREATE TABLE ' + spelTab + ' (name,cost,range,aoe,pow,up,off,description)')
+	cur.execute('CREATE TABLE ' + equiTab + ' (name,description)')
+	cur.execute('CREATE TABLE ' + weapTab + ' (name,cost,skill,attmod,pow,description)')
+	cur.execute('CREATE TABLE ' + armoTab + ' (name,cost,spdmod,defmod,armmod,description)')
+	cur.execute("INSERT INTO " + char.name +"(name) VALUES ('"+ str(char.name)+"')")
+	cur.execute('UPDATE ' + char.name + ' SET race= "'+ str(char.race)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET archtype= "'+ str(archEntry)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET phy= "'+ str(char.phy)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET spd= "'+ str(char.spd)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET str= "'+ str(char.stg)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET agl= "'+ str(char.agl)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET prw= "'+ str(char.prw)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET poi= "'+ str(char.poi)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET int= "'+ str(char.itl)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET arc= "'+ str(char.arc)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET per= "'+ str(char.per)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET willpower= "'+ str(char.willpower)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET init= "'+ str(char.initiative)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET def= "'+ str(char.defense)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET arm= "'+ str(char.armor)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET commandrange= "'+ str(char.cmdrange)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET career1= "'+ str(char.career1)+'"')
+	cur.execute('UPDATE ' + char.name + ' SET career2= "'+ str(char.career2)+'"')
+	cur.execute('Select * from Tony')
+	"""rows = cur.fetchall()
+	generic = []
+	reliable = []
+	for u in rows[0]:
+		generic.append(u)
+	cur.execute('PRAGMA table_info(Tony)')
+	lines = cur.fetchall()
+	for j in lines:
+		reliable.append(j[1])
+	g = 0
+	while g < len(variables):
+		print('{:<12} {:}'.format(reliable[g],generic[g]))
+		g+=1"""
+#char.displayStats(char.charStats)
+root = Tk()
+root.title("Race Stats")
+
+mainframe = ttk.Frame(root, padding="3 3 12 12")
+mainframe.grid(column=0, row=0, sticky=N)
+mainframe.columnconfigure(0, weight=1)
+mainframe.rowconfigure(0, weight=1)
+
+ttk.Label(mainframe, text="Name:").grid(column=1, row=1)
+ttk.Label(mainframe, text=char.name.capitalize()).grid(column=2, row=1)
+ttk.Label(mainframe, text="Race:").grid(column=3, row=1)
+ttk.Label(mainframe, text=char.race.capitalize()).grid(column=4, row=1)
+ttk.Label(mainframe, text="Archetype:").grid(column=5, row=1)
+ttk.Label(mainframe, text=char.archetype.capitalize()).grid(column=6, row=1)
+#ttk.Button(mainframe, text="GetRace").grid(column=7, row=1)
+
+subframe = ttk.Frame(root, padding="3 3 12 12")
+subframe.grid(column=0, row=1, sticky=W)
+subframe.columnconfigure(0, weight=1)
+subframe.rowconfigure(0, weight=1)
+subframe['borderwidth'] = 3
+subframe['relief'] = 'sunken'
+
+ttk.Label(subframe, text="Career1:").grid(column=1, row=1)
+ttk.Label(subframe, text=char.career1).grid(column=2, row=1)
+ttk.Label(subframe, text="Career2:").grid(column=3, row=1)
+ttk.Label(subframe, text=char.career2).grid(column=4, row=1)
+
+att = ttk.Frame(root, padding="3 3 12 12")
+att.grid(column=0, row=2, sticky=W)
+att['borderwidth'] = 4
+att['relief'] = 'raised'
+
+ttk.Label(att, text="PHY:").grid(column=1, row=2, sticky=W)
+ttk.Label(att, text=char.phy).grid(column=2, row=2, sticky=W)
+ttk.Label(att, text="SPD:").grid(column=3, row=1)
+ttk.Label(att, text=char.spd).grid(column=4, row=1)
+ttk.Label(att, text="STR:").grid(column=3, row=3)
+ttk.Label(att, text=char.stg).grid(column=4, row=3)
+ttk.Label(att, text="AGL:").grid(column=1, row=5, sticky=W)
+ttk.Label(att, text=char.agl).grid(column=2, row=5, sticky=W)
+ttk.Label(att, text="PRW:").grid(column=3, row=4)
+ttk.Label(att, text=char.prw).grid(column=4, row=4)
+ttk.Label(att, text="POI:").grid(column=3, row=6)
+ttk.Label(att, text=char.poi).grid(column=4, row=6)
+ttk.Label(att, text="INT:").grid(column=1, row=8, sticky=W)
+ttk.Label(att, text=char.itl).grid(column=2, row=8, sticky=W)
+ttk.Label(att, text="ARC:").grid(column=3, row=7)
+ttk.Label(att, text=char.arc).grid(column=4, row=7)
+ttk.Label(att, text="PER:").grid(column=3, row=9)
+ttk.Label(att, text=char.per).grid(column=4, row=9)
+
+derived = ttk.Frame(root, padding="3 3 12 12")
+derived.grid(column=1, row=2, sticky=(W, E))
+derived['borderwidth'] = 2
+derived['relief'] = 'sunken'
+ttk.Label(derived, text="Def:").grid(column=1, row=1, sticky=W)
+ttk.Label(derived, text=char.defense).grid(column=2, row=1, sticky=W)
+ttk.Label(derived, text="Arm:").grid(column=1, row=2, sticky=W)
+ttk.Label(derived, text=char.armor).grid(column=2, row=2, sticky=W)
+ttk.Label(derived, text="Init:").grid(column=1, row=3, sticky=W)
+ttk.Label(derived, text=char.initiative).grid(column=2, row=3, sticky=W)
+ttk.Label(derived, text="CMD:").grid(column=1, row=4, sticky=W)
+ttk.Label(derived, text=char.cmdrange).grid(column=2, row=4, sticky=W)
+ttk.Label(derived, text="WP:").grid(column=1, row=5, sticky=W)
+ttk.Label(derived, text=char.willpower).grid(column=2, row=5, sticky=W)
+
+for child in mainframe.winfo_children(): child.grid_configure(padx=5, pady=5)
+
+root.mainloop()

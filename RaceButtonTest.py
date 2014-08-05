@@ -107,11 +107,11 @@ mainframe.grid(column=0, row=0, sticky=(N,W,E,S))
 mainframe.columnconfigure(0, weight=1)
 mainframe.rowconfigure(0, weight=1)
 
-"""racedrop = ttk.Combobox(mainframe, textvariable = race)
+racedrop = ttk.Combobox(mainframe, textvariable = race)
 racedrop['values'] = ('Human', 'Dwarf')
 racedrop.grid(column=1, row=1, sticky=W)
-racedrop.bind('<<ComboboxSelected>>', getrace())"""
-humanbutton = ttk.Button(mainframe, text="Human", command=makeHuman)
+racedrop.bind('<<ComboboxSelected>>', getrace())
+"""humanbutton = ttk.Button(mainframe, text="Human", command=makeHuman)
 humanbutton.grid(column=1, row=1, sticky=W)
 dwarfbutton = ttk.Button(mainframe, text="Dwarf", command=makeDwarf)
 dwarfbutton.grid(column=3, row=1, sticky=W)
@@ -126,7 +126,7 @@ trollkinbutton.grid(column=13, row=1, sticky=W)
 ogrunbutton = ttk.Button(mainframe, text="Ogrun", command=makeOgrun)
 ogrunbutton.grid(column=15, row=1, sticky=W)
 satyxisbutton = ttk.Button(mainframe, text="Satyxis", command=makeSatyxis)
-satyxisbutton.grid(column=17, row=1, sticky=W)
+satyxisbutton.grid(column=17, row=1, sticky=W)"""
 
 ttk.Label(mainframe, text="PHY").grid(column=1, row=2, sticky=W)
 ttk.Label(mainframe, textvariable=phys).grid(column=2, row=2, sticky=W)

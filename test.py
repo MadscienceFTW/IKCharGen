@@ -1,32 +1,25 @@
+import os
 import sqlite3 as lite
 import sys
-import os
 import csv
-import xml.etree.ElementTree as ET
+from tkinter import *
+from tkinter import ttk
 
+archEntry = []
+careers = []
 variables = []
-testbed = []
-con = lite.connect('firsttest.db')
-csvWriter = csv.writer(open("output.txt", "w"))
-with con:
-	cur = con.cursor()
-	cur.execute('Select * from Tony')
-	rows = cur.fetchall()
-	csvWriter.writerows(rows)
-#data2 = open('f:\\Dev\\IKChargen\\variables.txt')
-#for each_line in data2:
-#	variables.append(each_line.split(','))
-#data2.close()
-spamReader = csv.reader(open('variables.txt',newline=''))
+tempbed = []
+tembed = []
+num = 0
+spaReader = csv.reader(open('newcareers.txt'))
+for row in spaReader:
+	for x in row:
+		careers.append(x)
+
+spamReader = csv.reader(open('variables.txt'))
 for row in spamReader:
-	variables.append(row)
-for x in variables[0]:
-	testbed.append(x)
-#print(testbed)
-tree = ET.parse('IKTestSheet.svg')
-root = tree.getroot()
-#print(root[4][2][0].attrib) # prints PHY tspan text
-for rank in root[4].findall(".//*[@id='PHY']"):
-	newtext = "Anthony"
-	rank.text = str(newtext)
-tree.write('IKTestSheet.svg')
+	for x in row:
+		variables.append(x)
+for row in careers:
+	num+=1
+print(num)
